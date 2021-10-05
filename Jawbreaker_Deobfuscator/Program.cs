@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Jawbreaker_Deobfuscator
@@ -63,7 +61,9 @@ namespace Jawbreaker_Deobfuscator
                     Environment.Exit(1337);
                 }
                 string Jawbreaked2 = Regex.Match(reader.ReadToEnd(), regexs[1]).ToString().Replace("\"", string.Empty);
-                File.WriteAllText(file.Replace(file.Split('\\')[file.Split('\\').Length - 1], "Oofed.py"), String.Format("# Oofed with https://github.com/HideakiAtsuyo/Jawbreaked\n{0}", new WebClient().DownloadString(String.Format("https://hastebin.com/raw/{0}", Jawbreaked2))));
+                string[] fileSplit = file.Split('\\');
+                string oofDownloaded = new WebClient().DownloadString(String.Format("https://hastebin.com/raw/{0}", Jawbreaked2));
+                File.WriteAllText(file.Replace(fileSplit[fileSplit.Length - 1], "Oofed.py"), String.Format("# Oofed with https://github.com/HideakiAtsuyo/Jawbreaked\n{0}", oofDownloaded));
             }
 
             File.Delete(output1);
